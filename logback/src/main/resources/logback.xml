@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="fileAppender" class="ch.qos.logback.core.FileAppender">
+        <file>C://Users//nishigandha.magaji//myLogFile.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d [%thread] %-5level  %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+	    <encoder>
+	      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+	    </encoder>
+  	</appender>
+  	
+  	<appender name = "rollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+  		<file>C://Users//nishigandha.magaji//myRollingLogFile.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>C://Users//nishigandha.magaji//myRollingLogFile.log.%d{yyyyMMddHH}.%i.gz</fileNamePattern>
+			<!-- each archived file's size will be max 10MB -->
+			<maxFileSize>2KB</maxFileSize>    
+			<!-- 30 days to keep -->
+			<maxHistory>1</maxHistory>
+			<!-- total size of all archive files, if total size > 100GB, it will delete old archived file -->
+			<totalSizeCap>2KB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+  	</appender>
+  	
+
+    <root level="TRACE">
+        <appender-ref ref="fileAppender" />
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="rollingFileAppender"></appender-ref>
+    </root>
+</configuration>
